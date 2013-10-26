@@ -42,9 +42,9 @@ class Messages {
 	// Class Variables
 	//-----------------------------------------------------------------------------------------------	
 	var $msgId;
-	var $msgTypes = array( 'help', 'info', 'warning', 'success', 'error' );
+	var $msgTypes = array( 'help', 'info', 'warning', 'success', 'danger' );
 	var $msgClass = 'messages';
-	var $msgWrapper = "<div class='%s %s'><a href='#' class='closeMessage'></a>\n%s</div>\n";
+	var $msgWrapper = "<div class='alert alert-dismissable %s alert-%s'><button type='button' class='close' data-dismiss='alert'>×</button>\n%s</div>\n";
 	var $msgBefore = '<p>';
 	var $msgAfter = "</p>\n";
 
@@ -82,7 +82,7 @@ class Messages {
 
 		// Replace any shorthand codes with their full version
 		if( strlen(trim($type)) == 1 ) {
-			$type = str_replace( array('h', 'i', 'w', 'e', 's'), array('help', 'info', 'warning', 'error', 'success'), $type );
+			$type = str_replace( array('h', 'i', 'w', 'e', 's'), array('help', 'info', 'warning', 'danger', 'success'), $type );
 		
 		// Backwards compatibility...
 		} elseif( $type == 'information' ) {
@@ -179,7 +179,7 @@ class Messages {
 	 * 
 	 */
 	public function hasErrors() { 
-		return empty($_SESSION['flash_messages']['error']) ? false : true;	
+		return empty($_SESSION['flash_messages']['danger']) ? false : true;	
 	}
 	
 	/**
